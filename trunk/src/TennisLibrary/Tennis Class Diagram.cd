@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="TennisLibrary.Match">
+    <Position X="6.25" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAEAAACAAAAwABAAAAAAAgEAAAIBAAAABAAAAA=</HashCode>
+      <FileName>Match.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TennisLibrary.Player">
+    <Position X="11.5" Y="4.75" Width="2.5" />
+    <Members>
+      <Field Name="_gamesWon" Hidden="true" />
+      <Field Name="_name" Hidden="true" />
+      <Field Name="_winner" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAAAIAAAAAAAAAAAAAAAAAQABAAAAAAAAEAAAQAAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TennisLibrary.GamePoint">
+    <Position X="8.75" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAgAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>GamePoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="TennisLibrary.MatchTypes">
+    <Position X="11.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MatchTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TennisLibrary.MatchProgress">
+    <Position X="8.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MatchProgress.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TennisLibrary.ScoreTypes">
+    <Position X="6.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQQAAAAAAAAAAAABAAAIAAAABAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ScoreTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

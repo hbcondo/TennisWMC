@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BD65B1A8-4949-41B8-BC46-EAE5DD895F3D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TennisWMC</RootNamespace>
+    <AssemblyName>TennisWMC</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <FullyQualifiedOutputPath>$(MSBuildProjectDirectory)\bin\Debug</FullyQualifiedOutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <FullyQualifiedOutputPath>$(MSBuildProjectDirectory)\bin\Release</FullyQualifiedOutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <StartWorkingDirectory>$(windir)\eHome</StartWorkingDirectory>
+    <StartArguments>-load:"resx://TennisWMC/TennisWMC.Resources/Default" -assemblyredirect:"$(FullyQualifiedOutputPath)" -markupredirect:"resx://TennisWMC/TennisWMC.Resources/,file://$(MSBuildProjectDirectory)\Markup\,.mcml"</StartArguments>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(windir)\eHome\McmlPad.exe</StartProgram>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.MediaCenter" />
+    <Reference Include="Microsoft.MediaCenter.UI" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\Launch.cs" />
+    <Compile Include="Code\Model.cs" />
+    <Compile Include="Code\TennisScoresPage.cs" />
+    <Compile Include="Code\TreeView\DirectoryTreeNode.cs" />
+    <Compile Include="Code\TreeView\TreeNode.cs" />
+    <Compile Include="Code\TreeView\TreeNodeEventArgs.cs" />
+    <Compile Include="Code\TreeView\TreeView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsTennis\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DevInstall.cmd" />
+    <None Include="Markup\Default.mcml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Setup\Build.cmd" />
+    <None Include="Setup\License.rtf" />
+    <None Include="Setup\License.txt" />
+    <None Include="Setup\LicenseAccessible.txt" />
+    <None Include="Setup\Setup-en-us.wxl" />
+    <None Include="Setup\Setup.wxs">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Readme.htm" />
+    <None Include="Setup\Registration.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Images\Application.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\ButtonDisabled.png" />
+    <Content Include="Images\ButtonDormant.png" />
+    <Content Include="Images\ButtonLeftFocus.png" />
+    <Content Include="Images\ButtonLeftFocusOverlay.png" />
+    <Content Include="Images\ButtonNoFocus.png" />
+    <Content Include="Images\ButtonPressedAfterGlow.png" />
+    <Content Include="Images\ButtonPressedHighlight.png" />
+    <Content Include="Images\ButtonRadioButtonBullet.png" />
+    <Content Include="Images\ButtonRadioButtonBulletFocus.png" />
+    <Content Include="Images\ButtonRadioButtonBulletNoFocus.png" />
+    <Content Include="Images\ButtonRadioButtonOutlineFocus.png" />
+    <Content Include="Images\ButtonRadioButtonOutlineNoFocus.png" />
+    <Content Include="Images\ButtonRightFocus.png" />
+    <Content Include="Images\ButtonRightFocusOverlay.png" />
+    <Content Include="Images\FindEditbox.png" />
+    <Content Include="Images\FindEditboxNoFocus.png" />
+    <Content Include="Images\FirstRunCheckBoxCheckedDisabled.png" />
+    <Content Include="Images\FirstRunCheckBoxCheckedFocus.png" />
+    <Content Include="Images\FirstRunCheckBoxCheckedNoFocus.png" />
+    <Content Include="Images\FirstRunCheckBoxCheckedPressed.png" />
+    <Content Include="Images\FirstRunCheckBoxUncheckedDisabled.png" />
+    <Content Include="Images\FirstRunCheckBoxUncheckedFocus.png" />
+    <Content Include="Images\FirstRunCheckBoxUncheckedNoFocus.png" />
+    <Content Include="Images\FirstRunCheckBoxUncheckedPressed.png" />
+    <Content Include="Images\ListboxNoFocus.png" />
+    <Content Include="Images\OverlaysButtonNoFocus.png" />
+    <Content Include="Images\PivotArrowLeft.png" />
+    <Content Include="Images\PivotArrowLeftNoFocus.png" />
+    <Content Include="Images\PivotArrowRight.png" />
+    <Content Include="Images\PivotArrowRightNoFocus.png" />
+    <Content Include="Images\SpinnerArrowBackDisabled.png" />
+    <Content Include="Images\SpinnerArrowBackDormant.png" />
+    <Content Include="Images\SpinnerArrowBackFocus.png" />
+    <Content Include="Images\SpinnerArrowBackFocusoverlay.png" />
+    <Content Include="Images\SpinnerArrowBackNoFocus.png" />
+    <Content Include="Images\SpinnerArrowForwardDisabled.png" />
+    <Content Include="Images\SpinnerArrowForwardDormant.png" />
+    <Content Include="Images\SpinnerArrowForwardFocus.png" />
+    <Content Include="Images\SpinnerArrowForwardFocusoverlay.png" />
+    <Content Include="Images\SpinnerArrowForwardNoFocus.png" />
+    <Content Include="Images\SpinnerBluebarLargeDormant.png" />
+    <Content Include="Images\SpinnerBluebarLargeFocus.png" />
+    <Content Include="Images\SpinnerBluebarLargeNoFocus.png" />
+    <Content Include="Markup\Base\Animations.mcml" />
+    <Content Include="Markup\Base\Base.mcml" />
+    <Content Include="Markup\Base\Colors.mcml" />
+    <Content Include="Markup\Base\FontNames.mcml" />
+    <Content Include="Markup\Base\Images.mcml" />
+    <Content Include="Markup\Base\Sounds.mcml" />
+    <Content Include="Markup\CheckboxSample.mcml" />
+    <Content Include="Markup\Controls\Controls.mcml" />
+    <Content Include="Markup\Controls\ExpandCollapseButton.mcml" />
+    <Content Include="Markup\Controls\HeaderButton.mcml" />
+    <Content Include="Markup\Controls\HeaderText.mcml" />
+    <Content Include="Markup\Controls\Pivot.mcml" />
+    <Content Include="Markup\Controls\PivotItem.mcml" />
+    <Content Include="Markup\Controls\SimpleButton.mcml" />
+    <Content Include="Markup\Controls\SimpleCheckbox.mcml" />
+    <Content Include="Markup\Controls\SimpleEditbox.mcml" />
+    <Content Include="Markup\Controls\SimpleRadioButton.mcml" />
+    <Content Include="Markup\Controls\SimpleRadioButtonGroup.mcml" />
+    <Content Include="Markup\Controls\SimpleSpinner.mcml" />
+    <Content Include="Markup\Controls\TreeNodeItem.mcml" />
+    <Content Include="Markup\Controls\TreeViewHost.mcml" />
+    <Content Include="Markup\EditboxSample.mcml" />
+    <Content Include="Markup\HeaderButtonSample.mcml" />
+    <Content Include="Markup\PivotSample.mcml" />
+    <Content Include="Markup\RadioButtonGroupSample.mcml" />
+    <Content Include="Markup\RepeaterSample.mcml" />
+    <Content Include="Markup\SpinnerSample.mcml" />
+    <Content Include="Markup\TreeViewSample.mcml" />
+    <None Include="Resources\ButtonNoFocus2.png" />
+    <None Include="Resources\ButtonNonFocus.png" />
+    <None Include="Resources\ButtonNoFocus.png" />
+    <Content Include="Sounds\Error.wav" />
+    <Content Include="Sounds\Focus.wav" />
+    <Content Include="Sounds\MiniSelect.wav" />
+    <Content Include="Sounds\PageTransition.wav" />
+    <Content Include="Sounds\Select.wav" />
+    <None Include="app.config" />
+    <None Include="key.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsTennis\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsTennis\Service.disco" />
+    <None Include="Web References\wsTennis\Service.wsdl" />
+    <None Include="Web References\wsTennis\TennisScoresCollection.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:81/WebServices/Tennis/">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsTennis\</RelPath>
+      <UpdateFromURL>http://localhost:81/WebServices/Tennis/</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>TennisWMC_wsTennis_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>%25windir%25\eHome\McmlVerifier.exe -verbose -assemblyredirect:"$(FullyQualifiedOutputPath)" -directory:"$(ProjectDir)Markup"
+REM "$(ProjectDir)Setup\Build.cmd" $(ConfigurationName)</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

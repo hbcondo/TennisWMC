@@ -1,0 +1,50 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:a="assembly://TennisWMC/TennisWMC"
+      xmlns:me="Me">
+
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Base" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Controls" />
+  
+  <UI Name="TreeViewSample">
+
+    <Properties>
+      
+      <a:Model Name="Model" Model="$Required" />
+      
+    </Properties>
+    
+    <Content>
+
+      <Panel Layout="Form">
+        <Children>
+          
+          <me:HeaderText Name="Header" Text="TreeView Sample">
+            <LayoutInput>
+              <FormLayoutInput Right="Parent,1,-30" Top="Parent,0,20" />
+            </LayoutInput>
+          </me:HeaderText>
+          
+          <Panel>
+
+            <LayoutInput>
+              <FormLayoutInput Horizontal="Center" Top="Header,1,80" />
+            </LayoutInput>
+
+            <Layout>
+              <FlowLayout Orientation="Vertical" Spacing="20,0" />
+            </Layout>
+
+            <Children>
+
+              <me:TreeViewHost TreeView="[Model.TreeView]" />
+
+            </Children>
+          </Panel>
+          
+        </Children>
+      </Panel>
+      
+    </Content>
+  </UI>
+
+</Mcml>

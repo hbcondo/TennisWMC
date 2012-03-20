@@ -1,0 +1,15 @@
+﻿<application 
+  id="{c57de8a3-25ec-412a-8aef-a7866ed75228}"
+  description="Displays tennis data including latest match scores"
+  StartMenuStripCategory="Tennis"
+  StartMenuStripTitle="Tennis"
+  title="Tennis" 
+  >
+	<entrypoint id="{10673e05-8d57-4997-bfb0-a09025936b8e}"
+				addin="TennisWMC.MyAddIn, TennisWMC,Culture=Neutral,Version=1.0.0.0,PublicKeyToken=e286b6fd70c84204"
+				title="scores"
+				description="Tennis add-in for Windows Media Center"
+				ImageUrl=".\Application.png">
+		<category category="Tennis"/>
+	</entrypoint>
+</application>

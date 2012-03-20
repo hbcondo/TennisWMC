@@ -1,0 +1,11 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:a="assembly://TennisWMC/TennisWMC"
+      >
+
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Animations" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Images" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Colors" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Sounds" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/FontNames" />
+  
+</Mcml>

@@ -1,0 +1,66 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:a="assembly://TennisWMC/TennisWMC"
+      xmlns:cor="assembly://MScorLib/System"
+      xmlns:me="Me">
+
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Base" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Controls" />
+
+  <UI Name="PivotSample">
+
+    <Locals>
+
+      <Choice Name="PivotModel">
+        <Options>
+          <cor:String cor:String="First"/>
+          <cor:String cor:String="Second"/>
+          <cor:String cor:String="Third"/>
+          <cor:String cor:String="Fourth"/>
+        </Options>
+      </Choice>
+
+    </Locals>
+
+    <Rules>
+
+      <Binding Source="[PivotModel.Chosen.ToString]" Target="[Label.Content]" />
+      
+    </Rules>
+
+    <Content>
+
+      <!-- Background -->
+      <Panel Layout="Form">
+        <Children>
+
+          <!-- Header -->
+          <me:HeaderText Name="Header" Text="Pivot Sample">
+            <LayoutInput>
+              <FormLayoutInput Right="Parent,1,-30" Top="Parent,0,20" />
+            </LayoutInput>
+          </me:HeaderText>
+          
+          <me:Pivot Model="[PivotModel]">
+            <LayoutInput>
+              <FormLayoutInput Horizontal="Near" Top="Header,1,25" />
+            </LayoutInput>
+          </me:Pivot>
+          
+          <Panel>
+            <LayoutInput>
+              <FormLayoutInput Horizontal="Center" Vertical="Center" />
+            </LayoutInput>
+            <Children>
+              <Text Name="Label" Color="color://me:LightBlue" Font="font://me:Font" />
+            </Children>
+          </Panel>
+          
+        </Children>
+      </Panel>
+      
+    </Content>
+  </UI>
+
+  <Font Name="Font" FontName="global://me:RegularFontName" FontSize="20" />
+
+</Mcml>

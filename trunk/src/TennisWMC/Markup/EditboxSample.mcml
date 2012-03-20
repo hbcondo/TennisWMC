@@ -1,0 +1,69 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:a="assembly://TennisWMC/TennisWMC"
+      xmlns:cor="assembly://MScorLib/System"
+      xmlns:addin="assembly://Microsoft.MediaCenter/Microsoft.MediaCenter.Hosting" 
+      xmlns:me="Me">
+
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Base" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Controls" />
+
+  <UI Name="More">
+
+    <Properties>
+      
+      <a:Model Name="Model" Model="$Required" />
+      
+      
+    </Properties>
+
+    <Locals>
+
+      <addin:AddInHost Name="AddInHost" />
+
+    </Locals>
+
+    <Content>
+
+      <!-- Background -->
+      <Panel Layout="Form">
+        <Children>
+
+          <!-- Header -->
+          <me:HeaderText Name="Header" Text="Editbox Samples">
+            <LayoutInput>
+              <FormLayoutInput Right="Parent,1,-30" Top="Parent,0,20" />
+            </LayoutInput>
+          </me:HeaderText>
+
+          <Panel>
+            <LayoutInput>
+              <FormLayoutInput Horizontal="Center" Vertical="Center" />
+            </LayoutInput>
+            <Children>
+
+              <Panel Layout="HorizontalFlow">
+                <Children>
+                  <me:SimpleEditbox Name="Editbox" Size="450,51" EditableText="[Model.EditableItem]" />
+                  <me:SimpleButton Text="Show Dialog" Size="175,51" Margins="10,0,0,0">
+                    <Command>
+                      <InvokeCommand Target="[AddInHost.MediaCenterEnvironment.Dialog]"
+                                     text="[Model.EditableItem.Value]"
+                                     caption="Editbox Value"
+                                     buttons="OK"
+                                     timeout="10"
+                                     isModal="false"
+                                     />
+                    </Command>                    
+                  </me:SimpleButton>
+                </Children>
+              </Panel>              
+              
+            </Children>
+          </Panel>
+          
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+</Mcml>

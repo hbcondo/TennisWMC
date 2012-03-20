@@ -1,0 +1,57 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:a="assembly://TennisWMC/TennisWMC"
+      xmlns:cor="assembly://MScorLib/System"
+      xmlns:me="Me">
+
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Base" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Controls" />
+
+  <UI Name="More">
+
+    <Properties>
+      
+      <a:Model Name="Model" Model="$Required" />
+      
+    </Properties>
+
+    <Content>
+
+      <!-- Background -->
+      <Panel Layout="Form">
+        <Children>
+
+          <!-- Header -->
+          <me:HeaderText Name="Header" Text="Checkbox Samples">
+            <LayoutInput>
+              <FormLayoutInput Right="Parent,1,-30" Top="Parent,0,20" />
+            </LayoutInput>
+          </me:HeaderText>
+
+          <Panel>
+            
+            <LayoutInput>
+              <FormLayoutInput Horizontal="Center" Vertical="Center" />
+            </LayoutInput>  
+            
+            <Children>
+
+              <Panel Layout="HorizontalFlow" MinimumSize="500,0">
+
+                <Layout>
+                  <FlowLayout Orientation="Horizontal" Spacing="10,0" />
+                </Layout>
+
+                <Children>
+                  <me:SimpleCheckbox Name="Checkbox" Checked="[Model.CheckBoxItem]" />
+                </Children>
+              </Panel>
+              
+            </Children>
+          </Panel>
+          
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+</Mcml>

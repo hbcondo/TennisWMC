@@ -1,0 +1,56 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:a="assembly://TennisWMC/TennisWMC"
+      xmlns:cor="assembly://MScorLib/System"
+      xmlns:me="Me">
+
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Base" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Controls" />
+
+  <UI Name="RadioButtonGroup">
+
+    <Locals>
+
+      <Choice Name="Model">
+        <Options>
+          <cor:String String="Choice 1" />
+          <cor:String String="Choice 2" />
+          <cor:String String="Choice 3" />
+          <cor:String String="Choice 4" />
+          <cor:String String="Choice 5" />
+        </Options>
+      </Choice>
+      
+    </Locals>
+
+    <Content>
+
+      <!-- Background -->
+      <Panel Layout="Form">
+        <Children>
+
+          <!-- Header -->
+          <me:HeaderText Name="Header" Text="RadioButtonGroup Samples">
+            <LayoutInput>
+              <FormLayoutInput Right="Parent,1,-30" Top="Parent,0,20" />
+            </LayoutInput>
+          </me:HeaderText>
+
+          <Panel>
+            
+            <LayoutInput>
+              <FormLayoutInput Horizontal="Center" Vertical="Center" />
+            </LayoutInput>
+            
+            <Children>
+
+              <me:SimpleRadioButtonGroup Model="[Model]" />
+              
+            </Children>
+          </Panel>
+          
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+</Mcml>
