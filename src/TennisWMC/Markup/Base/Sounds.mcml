@@ -1,0 +1,10 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      >
+
+  <Sound Name="Select"          Source="resx://TennisWMC/TennisWMC.Resources/Select" />
+  <Sound Name="Miniselect"      Source="resx://TennisWMC/TennisWMC.Resources/Miniselect" />
+  <Sound Name="Focus"           Source="resx://TennisWMC/TennisWMC.Resources/Focus" />
+  <Sound Name="Error"           Source="resx://TennisWMC/TennisWMC.Resources/Error" />
+  <Sound Name="PageTransition"  Source="resx://TennisWMC/TennisWMC.Resources/PageTransition" />
+  
+</Mcml>

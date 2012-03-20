@@ -1,0 +1,226 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:a="assembly://TennisWMC/TennisWMC"
+      xmlns:cor="assembly://MScorLib/System"
+      xmlns:me="Me">
+
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Base" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Controls" />
+
+  <UI Name="RepeaterSample">
+
+    <Locals>
+      
+      <Command Name="SmallSize" Description="single"/>
+      <Command Name="MediumSize" Description="double"/>
+      <Command Name="LargeSize" Description="triple"/>
+      
+      <ArrayListDataSet Name="Locations">
+        <Source>
+          <cor:String String="London"/>
+          <cor:String String="New York"/>
+          <cor:String String="Tokyo"/>
+          <cor:String String="Paris"/>
+          <cor:String String="Berlin"/>
+          <cor:String String="Delhi"/>
+          <cor:String String="Los Angeles"/>
+          <cor:String String="Rome"/>
+          <cor:String String="Barcelona"/>
+          <cor:String String="Shanghai"/>
+          <cor:String String="Moscow"/>
+          <cor:String String="Sydney"/>
+          <cor:String String="Istanbul"/>
+          <cor:String String="Belfast"/>
+          <cor:String String="Vancouver"/>
+          <cor:String String="Manchester"/>
+          <cor:String String="Hamburg"/>
+          <cor:String String="Beijing"/>
+          <cor:String String="Bombay"/>
+          <cor:String String="Cape Town"/>
+          <cor:String String="Melbourne"/>
+          <cor:String String="Stockholm"/>
+          <cor:String String="Kyoto"/>
+          <cor:String String="Newcastle"/>
+          <cor:String String="Oslo"/>
+          <cor:String String="Lisbon"/>
+          <cor:String String="Cancun"/>
+          <cor:String String="Auckland"/>
+          <cor:String String="Aberdeen"/>
+          <cor:String String="Windsor"/>
+          <cor:String String="Puerto Vallarta"/>
+          <cor:String String="Amsterdam"/>
+          <cor:String String="Toledo"/>
+          <cor:String String="Miami"/>
+        </Source>
+      </ArrayListDataSet>
+
+      <ScrollingHandler Name="ScrollingHandler" HandlerStage="Bubbled" />
+      <ScrollingData Name="ScrollingData" BeginPadding="75" EndPadding="75" />
+
+    </Locals>
+
+    <Rules>
+      
+      <Changed Source="[LargeSize.Invoked]">
+        <Actions>
+          <Set Target="[FadeClip.MaximumSize]" Value="0,560" />
+        </Actions>
+      </Changed>
+      
+      <Changed Source="[MediumSize.Invoked]">
+        <Actions>
+          <Set Target="[FadeClip.MaximumSize]" Value="0,443" />
+        </Actions>
+      </Changed>
+      
+      <Changed Source="[SmallSize.Invoked]">
+        <Actions>
+          <Set Target="[FadeClip.MaximumSize]" Value="0,325" />
+        </Actions>
+      </Changed>
+      
+      <Default Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]" />
+      <Default Target="[ScrollingData.Repeater]" Value="[ListRepeater]" />
+      
+    </Rules>
+
+    <Content>
+
+      <ColorFill Content="Transparent" Layout="Form" >
+        <Children>
+          
+          <!-- Page Title Panel -->
+          <me:HeaderText Text="Repeater Sample">
+            <LayoutInput>
+              <FormLayoutInput Right="Parent,1,-30" Top="Parent,0,20" />
+            </LayoutInput>
+          </me:HeaderText>
+          
+          <!-- Header Controls Panel -->
+          <Panel>
+          
+            <LayoutInput>
+              <FormLayoutInput Top="Parent,0,75" Left="Parent,0.10,0"/>
+            </LayoutInput>
+            
+            <Animations>
+              <Animation Animation="animation://me:ScrollerMoveItemSmooth" />
+            </Animations>
+            
+            <Layout>
+              <FlowLayout Orientation="Horizontal" Spacing="15,0" ItemAlignment="Center"/>
+            </Layout>
+            
+            <Children>
+            
+              <me:HeaderButton Label="Single" 
+                               Command="[SmallSize]"
+                               BulletImage="image://me:ButtonRadioButtonBulletNoFocus" />
+              <me:HeaderButton Label="Double" 
+                               Command="[MediumSize]"
+                               BulletImage="image://me:ButtonRadioButtonBulletNoFocus" />
+              <me:HeaderButton Label="Triple" 
+                               Command="[LargeSize]"
+                               BulletImage="image://me:ButtonRadioButtonBulletNoFocus" />              
+            
+            </Children>
+            
+          </Panel>
+          
+          <!-- Center Content Panel -->
+          <Panel>
+            
+            <LayoutInput>
+              <FormLayoutInput Top="Parent,0,135" Left="Parent,0,0" />
+            </LayoutInput>
+            
+            <Layout>
+              <FlowLayout Orientation="Vertical"  Spacing="5,0" ItemAlignment="Near"/>
+            </Layout>
+            
+            <Children>
+              
+              <ColorFill Content="Transparent">
+                <Children>
+                  
+                  <Clip Name="FadeClip" 
+                        FadeSize="50" 
+                        Orientation="Vertical" 
+                        MinimumSize="700,325" 
+                        Margins="-20,0,-30,0" 
+                        MaximumSize="0,325" 
+                        Layout="Fill"
+                        CenterPointPercent="0.5,0.5,1"
+                        >
+                    <Children>
+
+                      <Scroller Name="Scroller" 
+                                Orientation="Horizontal" 
+                                MaximumSize="0,650" 
+                                FadeSize="-30" 
+                                Margins="0,50,0,00"
+                                ScrollingData="[ScrollingData]" 
+                                >
+                        <Children>
+
+                          <Repeater Name="ListRepeater" Source="[Locations]">
+                            <Layout>
+                              <GridLayout Orientation="Vertical" AllowWrap="true" Spacing="10,10" />
+                            </Layout>
+                            <Content>
+                              <me:ListItem Description="[RepeatedItem!cor:String]"/>
+                            </Content>
+                          </Repeater>
+
+                        </Children>
+                      </Scroller>
+
+                    </Children>
+                  </Clip>
+                  
+                </Children>
+              </ColorFill>
+
+            </Children>
+          </Panel>
+          
+        </Children>
+      </ColorFill>
+
+
+    </Content>
+
+  </UI>
+
+  <UI Name="ListItem">
+    
+    <Properties>
+      <cor:String Name="Description" String="null"/>
+    </Properties>
+
+    <Locals>
+      <ClickHandler Name="Clicker"/>
+    </Locals>
+
+    <Rules>
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Actions>
+          <Set Target="[Background.Content]" Value="LightGoldenrodYellow"/>
+          <Set Target="[Label.Color]" Value="Black"/>
+        </Actions>
+      </Condition>
+    </Rules>
+
+    <Content>
+      <ColorFill Name="Background" Content="SlateGray" Padding="5,5,5,5">
+        <Layout>
+          <FlowLayout Orientation="Vertical" ItemAlignment="Center"/>
+        </Layout>
+        <Children>
+          <Graphic Content="resx://TennisWMC/TennisWMC.Resources/AppIcon"/>
+          <Text Name="Label" Content="[Description]" Color="White" Font="Verdana,10"/>
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+
+</Mcml>

@@ -1,0 +1,17 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:a="assembly://TennisWMC/TennisWMC"
+      xmlns:me="Me"
+      >
+
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/HeaderButton" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/HeaderText" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/SimpleButton" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/SimpleCheckbox" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/SimpleEditbox" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/SimpleRadioButtonGroup" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/SimpleSpinner" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/TreeViewHost" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Pivot" />
+  
+</Mcml>

@@ -1,0 +1,435 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:a="assembly://TennisWMC/TennisWMC"
+      xmlns:ws="assembly://TennisWMC/TennisWMC.wsTennis"
+      xmlns:me="Me">
+
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Base" />
+  <Aggregate Source="resx://TennisWMC/TennisWMC.Resources/Controls" />
+
+  <Font Name="FooterFont" FontName="Arial" FontStyle="None" FontSize="16" />
+  
+  <UI Name="TennisScoresPage">
+    <Properties>
+      <a:TennisScoresPage Name="TennisScores" />
+      <Command Name="CourtDetails" Description="MyDesc"/>
+    </Properties>
+
+    <Locals>
+
+      <Choice Name="PivotModel">
+        <Options>
+          <cor:String cor:String="SINGLES"/>
+          <cor:String cor:String="DOUBLES"/>
+        </Options>
+      </Choice>      
+
+      <Command Name="SinglesScores" Description="Singles"/>
+      <Command Name="DoublesScores" Description="Doubles"/>
+
+      <ScrollingHandler Name="ScrollingHandler" HandlerStage="Bubbled" />
+      <ScrollingData Name="ScrollingData" BeginPadding="75" EndPadding="75" />
+    </Locals>
+
+    <Rules>
+      <!--Changed Source="[PivotModel.ChosenIndex]">
+        <Actions>
+          <Set Target="[ScoreRetrievalStatus.Content]" Value="[PivotModel.ChosenIndex.ToString]" />
+        </Actions>
+      </Changed-->
+
+      <Changed Source="[PivotModel.Chosen]">
+        <Conditions>
+          <Equality Source="[PivotModel.Chosen.ToString]" ConditionOp="Equals" Value="DOUBLES"></Equality>
+        </Conditions>
+        <Actions>
+          <Set Target="[ListRepeater.Source]" Value="[TennisScores.Doubles]" />
+        </Actions>     
+      </Changed>
+
+      <!-- Display status message if no matches are in collection and hide footer -->
+      <Condition Source="[ListRepeater.Source.Count]" SourceValue="0" Value="true" Target="[StatusMessage.Visible]" />
+      <Condition Source="[ListRepeater.Source.Count]" SourceValue="0" Value="false" Target="[FooterPanel.Visible]" />
+      <Condition Source="[TennisScores.ScoreRetrievalStatus]" SourceValue="Failure" Value="   Unable to retrieve scores at this time. Please try again later." Target="[StatusMessage.Content]" />
+      
+      <Changed Source="[SinglesScores.Invoked]">
+        <Actions>
+          <Set Target="[ListRepeater.Source]" Value="[TennisScores.Singles]" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[DoublesScores.Invoked]">
+        <Actions>
+          <Set Target="[ListRepeater.Source]" Value="[TennisScores.Doubles]" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[CourtDetails.Invoked]">
+        <Actions>
+          <Set Target="[MyFooter.MatchDetails]" Value="[TennisScores.MatchDetails]" />
+        </Actions>
+      </Changed>
+
+      <Default Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]" />
+      <Default Target="[ScrollingData.Repeater]" Value="[ListRepeater]" />
+
+      <Binding Source="[TennisScores.MatchDetails]" Target="[MyFooter.MatchDetails]" />
+      <Binding Source="[TennisScores.MatchDetails.MatchIndex]" Target="[MyFooter.CurrentIndex]" />
+      <Binding Source="[ScrollingData.Repeater.Source.Count]" Target="[MyFooter.SourceTotal]" />
+    </Rules>
+
+    <Content>
+
+      <ColorFill Content="Transparent" Layout="Form" Name="PrimaryColorFill">
+        <Children>
+
+          <!-- Page Title Panel -->
+          <me:HeaderText Text="Tennis scores">
+            <LayoutInput>
+              <FormLayoutInput Right="Parent,1,-30" Top="Parent,0,20" />
+            </LayoutInput>
+          </me:HeaderText>
+
+          <!-- Header Controls Panel -->
+          <Panel>
+            <LayoutInput>
+              <FormLayoutInput Top="Parent,0,100" Left="Parent,0.95,0"/>
+            </LayoutInput>
+            <Layout>
+              <FlowLayout Orientation="Horizontal" Spacing="5,0" ItemAlignment="Center"/>
+            </Layout>
+            <Children>
+              <me:Pivot Model="[PivotModel]" />
+            </Children>
+          </Panel>
+          
+          <!-- Center Content Panel -->
+          <Panel>
+
+            <LayoutInput>
+              <FormLayoutInput Top="Parent,0,135" Left="Parent,0.10,0" />
+            </LayoutInput>
+
+            <Layout>
+              <FlowLayout Orientation="Vertical"  Spacing="5,0" ItemAlignment="Near"/>
+            </Layout>
+
+            <Children>
+
+              <ColorFill Content="Transparent">
+                <Children>
+
+                  <!-- Use this to adjust number of rows on page load -->
+                  <Clip Name="FadeClip"
+                        FadeSize="50"
+                        Orientation="Vertical"
+                        Margins="20,0,-30,0"
+                        MinimumSize="700,320"
+                        MaximumSize="0,320"
+                        Layout="Fill"
+                        CenterPointPercent="0.5,0.5,1"
+                      >
+                    <Children>
+
+                      <Scroller Name="Scroller"
+                                Orientation="Horizontal"
+                                MaximumSize="0,650"
+                                FadeSize="-15"
+                                Margins="-10,50,0,00"
+                                ScrollingData="[ScrollingData]"
+                              >
+                        <Children>
+                          <Text Name="StatusMessage" Content="     No matches have been scheduled." Visible="false" Color="White" />
+                          <Text Name="ScoreRetrievalStatus" Content="[TennisScores.ScoreRetrievalStatus]" Color="Red" Visible="false" />
+                          <Repeater Name="ListRepeater" Source="[TennisScores.Singles]">
+                            <Layout>
+                              <GridLayout Orientation="Vertical" AllowWrap="true" Spacing="2,2"  />
+                            </Layout>
+                            <Content>
+                              <me:TotalBoxes TennisObj="[TennisScores]" TennisMatch="[RepeatedItem!ws:Match]" Command="[CourtDetails]" MatchIndex="[RepeatedItemIndex]" />
+                            </Content>
+                          </Repeater>
+                        </Children>
+
+                      </Scroller>
+
+                    </Children>
+                  </Clip>
+
+                </Children>
+              </ColorFill>
+
+
+            </Children>
+          </Panel>
+
+          <!-- Footer -->
+          <Panel Name="FooterPanel">
+            <LayoutInput>
+              <!--FormLayoutInput Left="Parent,0,0"
+                               Bottom="Parent,1,-100"/-->
+              <AnchorLayoutInput Vertical="Far" Left="Parent,0.10,0" />
+            </LayoutInput>
+            <Children>
+              <me:Footer Name="MyFooter" MatchDetails="[TennisScores.MatchDetails]"  />
+            </Children>
+          </Panel>
+        </Children>
+      </ColorFill>
+
+    </Content>
+
+  </UI>
+
+  <UI Name="Footer">
+    <Properties>
+      <ws:Match Name="MatchDetails" />
+      <cor:Int32 Name="CurrentIndex" />
+      <cor:Int32 Name="SourceTotal" />
+    </Properties>
+    <Locals>
+      <cor:String Name="TournamentText" cor:String=""/>
+      <cor:String Name="CourtText" cor:String=""/>
+      <cor:String Name="SurfaceTypeText" cor:String=""/>
+      <cor:String Name="DurationText" cor:String=""/>
+      <cor:String Name="DatePlayedText" cor:String=""/>
+    </Locals>
+    <Rules>
+      <!--Condition Source="[CurrentIndex]" ConditionOp="Equals" SourceValue="-1" Target="[FooterPanel.Visible]" Value="false" />
+      <Condition Source="[CurrentIndex]" ConditionOp="GreaterThan" SourceValue="-1" Target="[FooterPanel.Visible]" Value="true" /-->
+      
+      <Binding Source="[MatchDetails.Tournament]" Target="[MatchTournament.Content]" />
+      <Binding Source="[MatchDetails.Court]" Target="[MatchCourt.Content]" />
+      <Binding Source="[MatchDetails.SurfaceType]" Target="[MatchSurfaceType.Content]" />
+      <Binding Source="[MatchDetails.Duration]" Target="[MatchLengthOfTime.Content]" />
+      <Binding Source="[MatchDetails.DatePlayed.ToShortDateString]" Target="[MatchDatePlayed.Content]" />
+
+      <Binding Source="[CurrentIndex.ToString]" Target="[CurrentPageText.Content]" />
+      <Binding Source="[SourceTotal.ToString]" Target="[TotalPagesText.Content]" />
+
+      <Condition Source="[MatchDetails.Duration]" SourceValue="0" Target="[MatchLengthPanel.Visible]" Value="false" />
+    </Rules>
+    <Content>
+      <Panel>
+        <Children>
+          <ColorFill Content="Transparent" Margins="100,0,0,0" Layout="VerticalFlow">
+            <Children>
+              <Panel>
+                <Layout>
+                  <FlowLayout Orientation="Horizontal"/>
+                </Layout>
+                <Children>
+                  <Text Color="White" Font="font://me:FooterFont" Name="MatchTournament" />
+                  <Text Color="White" Font="font://me:FooterFont" Content=" (" />
+                  <Text Color="White" Font="font://me:FooterFont" Name="MatchSurfaceType" />
+                  <Text Color="White" Font="font://me:FooterFont" Content="Court )" />
+                </Children>
+              </Panel>
+              <Panel>
+                <Layout>
+                  <FlowLayout Orientation="Horizontal"/> 
+                </Layout>
+                <Children>
+                  <!--Text Color="White" Font="font://me:FooterFont" Content="Played at " /-->
+                  <Text Color="White" Font="font://me:FooterFont" Name="MatchCourt" />
+                  <Text Color="White" Font="font://me:FooterFont" Content="," />
+                  <Text Color="White" Font="font://me:FooterFont" Name="MatchDatePlayed" />
+                </Children>
+              </Panel>
+              <Panel Name="MatchLengthPanel" Visible="true">
+                <Layout>
+                  <FlowLayout Orientation="Horizontal"/>
+                </Layout>
+                <Children>
+                  <Text Color="White" Font="font://me:FooterFont" Content="Match Time: " />
+                  <Text Color="White" Font="font://me:FooterFont" Name="MatchLengthOfTime" />
+                </Children>
+              </Panel>
+              <Panel Visible="true">
+                <Layout>
+                  <FlowLayout Orientation="Horizontal" StripAlignment="Far" Spacing="1,1" />
+                </Layout>
+                <Children>
+                  <Text Font="Arial,18" Color="White" Name="CurrentPageText" />
+                  <Text Font="Arial,18" Color="Cyan" Content="|" />
+                  <Text Font="Arial,18" Color="Cyan" Name="TotalPagesText" />
+                </Children>
+              </Panel>
+            </Children>
+          </ColorFill>
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+  <UI Name="TotalBoxes">
+    <Properties>
+      <a:TennisScoresPage Name="TennisObj" />
+      <ws:Match Name="TennisMatch" />
+      <Index Name="MatchIndex" Index="$Required" />
+      <Command Name="Command" Command="$Required" />
+      <cor:Boolean Name="IsNavigatingCommand" Boolean="false" />
+
+      <!--Size Name="Size" Size="282,118" /-->
+      <Size Name="Size" Size="330,118" />
+      <Font Name="Font" Font="font://me:Font" />
+      <Image Name="ImageFocus" Image="image://me:ButtonLeftFocus" />
+      <Image Name="ImageNoFocus" Image="image://me:ButtonNoFocus" />
+      <Image Name="ImageDormant" Image="image://me:ButtonDormant" />
+    </Properties>
+
+    <Locals>
+      <ClickHandler Name="Clicker"/>
+    </Locals>
+
+    <Rules>
+      <Binding Source="[Command]" Target="[Clicker.Command]" />
+      <Binding Source="[Command.Available]" Target="[Input.KeyInteractive]" />
+      <Binding Source="[Input.KeyFocus]" Target="[imgFocusOverlay.Visible]" />
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Conditions>
+          <Equality Source="[Command.Available]" ConditionOp="Equals" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[imgButton.Content]" Value="[ImageFocus]"/>
+          <PlaySound Sound="sound://me:Focus" />
+          <Invoke Target="[TennisObj.SetMatchDetails]" indexValue="[MatchIndex.Value]" matchType="[TennisMatch.MatchType]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Input.MouseFocus]" SourceValue="true">
+        <Conditions>
+          <Equality Source="[Command.Available]" ConditionOp="Equals" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[imgButton.Content]" Value="[ImageFocus]"/>
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Command.Available]" ConditionOp="Equals" SourceValue="false">
+        <Actions>
+          <Set Target="[imgButton.Content]" Value="[ImageDormant]" />
+        </Actions>
+      </Condition>
+
+    </Rules>
+    <Content>
+      <ColorFill Name="Background" Content="Transparent" MinimumSize="330,118" MaximumSize="330,118">
+        <Layout>
+          <FlowLayout Orientation="Horizontal" StripAlignment="Near" ItemAlignment="Near" />
+        </Layout>
+        <Children>
+          <Graphic Name="imgButton"
+                   Content="[ImageNoFocus]"
+                   Padding="12,7,12,7"
+                   MouseInteractive="true"
+                   MinimumSize="[Size]"
+                   MaximumSize="[Size]"
+                   SizingPolicy="SizeToContent"
+                   HorizontalAlignment="Fill"
+                   VerticalAlignment="Fill"
+                   >
+            <Children>
+              <me:Inline TennisMatch="[TennisMatch]" />
+              <me:Expanded TennisMatch="[TennisMatch]" />
+            </Children>
+          </Graphic>
+          <Graphic Name="imgFocusOverlay"
+         Content="image://me:ButtonLeftFocusOverlay"
+         MinimumSize="[Size]"
+         MaximumSize="[Size]"
+         SizingPolicy="SizeToContent"
+         HorizontalAlignment="Fill"
+         VerticalAlignment="Fill"
+                   >
+            <Animations>
+              <Animation Animation="animation://me:ButtonFocusOverlayIdle"/>
+            </Animations>
+          </Graphic>
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+
+  <!--This UI uses expanded form with custom settings for spacing and alignment. -->
+  <UI Name="Expanded">
+    <Properties>
+      <ws:Match Name="TennisMatch" />
+    </Properties>
+    <Content>
+      <ColorFill Content="Transparent">
+        <Layout>
+          <FlowLayout Orientation="Vertical" ItemAlignment="Far" />
+        </Layout>
+        <Children>
+          <Text Name="Spacer" Font="Arial, 14" Margins="0,10,0,5" Content=" " />
+          <Repeater Name="Player1Games" Source="[TennisMatch.Player1.GamesWon]">
+            <Layout>
+              <FlowLayout Orientation="Horizontal" Spacing="5,0" StripAlignment="Far" ItemAlignment="Far" />
+            </Layout>
+            <Content>
+              <me:SetScore GamePoint="[RepeatedItem!ws:GamePoint]" />
+            </Content>
+          </Repeater>
+
+          <Repeater Name="Player2Games" Source="[TennisMatch.Player2.GamesWon]">
+            <Layout>
+              <FlowLayout Orientation="Horizontal" Spacing="5,0" StripAlignment="Far" ItemAlignment="Far" />
+            </Layout>
+            <Content>
+              <me:SetScore GamePoint="[RepeatedItem!ws:GamePoint]" />
+            </Content>
+          </Repeater>
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+
+  <!-- Set Scores -->
+  <UI Name="SetScore">
+    <Properties>
+      <ws:GamePoint Name="GamePoint" />
+    </Properties>
+    <Rules>
+      <!-- Highlight winning set -->
+      <Condition Source="[GamePoint.IsWinner]" ConditionOp="Equals" SourceValue="true" Value="Gold" Target="[Score.Color]" />
+    </Rules>
+    <Content>
+      <Text Name="Score" Content="[GamePoint.Score.ToString]" Font="Arial,16" Color="White" />
+    </Content>
+  </UI>
+
+  <!--This UI uses inline form with default settings for vertical flow. -->
+  <UI Name="Inline">
+    <Properties>
+      <ws:Match Name="TennisMatch" />
+    </Properties>
+    <Rules>
+      <!-- Show Match Status -->
+      <Condition Source="[TennisMatch.Status]" SourceValue="FINISHED" Value="FINAL" Target="[StatusText.Content]" />
+      <Condition Source="[TennisMatch.Status]" SourceValue="IN_PLAY" Value="IN PLAY" Target="[StatusText.Content]" />
+      <Condition Source="[TennisMatch.Status]" SourceValue="NOT_STARTED" Value="NOT STARTED" Target="[StatusText.Content]" />
+
+      <!-- Highlight Winner -->
+      <Condition Source="[TennisMatch.Player1.IsWinner]" ConditionOp="Equals" SourceValue="true" Value="Gold" Target="[Player1.Color]" />
+      <Condition Source="[TennisMatch.Player2.IsWinner]" ConditionOp="Equals" SourceValue="true" Value="Gold" Target="[Player2.Color]" />
+      
+      <!-- If match has not started, expand maximum size so name of players fills box since there are no set scores to show -->
+      <Condition Source="[TennisMatch.Status]" SourceValue="NOT_STARTED" Value="330,118" Target="[ColorFillArea.MaximumSize]" />
+    </Rules>
+    <Content>
+      <ColorFill Content="Transparent" Layout="VerticalFlow" MaximumSize="180, 105" Name="ColorFillArea">
+        <Children>
+          <Text Name="StatusText" Font="Arial,14" Color="DarkGray" Margins="0,10,0,5" />
+          <Text Name="Player1" Content="[TennisMatch.Player1.Name]" Font="Arial,16" Color="White" Margins="0,0,0,2" />
+          <Text Name="Player2" Content="[TennisMatch.Player2.Name]" Font="Arial,16" Color="White" />
+        </Children>
+      </ColorFill>
+    </Content>
+  </UI>
+
+
+
+
+</Mcml>
